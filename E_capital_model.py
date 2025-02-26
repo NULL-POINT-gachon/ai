@@ -36,35 +36,62 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import cross_val_score
 
-visit_E = pd.read_csv('../1.inputdata/tn_visit_area_info_E.csv')
+# csv 내 코드 데이터
 
-id_list=['E']
+codeA = pd.read_csv('./data/Train/tc_codea_코드A.csv')
+codeB = pd.read_csv('./data/Train/tc_codea_코드B.csv')
+code_area = pd.read_csv('./data/Train/tc_sgg_시군구코드.csv')
 
-visit_data_list=[visit_E]
+# 라벨링 데이터
 
-for id,visit_area_info in zip(id_list,visit_data_list):
-  # 관광지 선택
-  visit_info = visit_area_info[ (visit_area_info['VISIT_AREA_TYPE_CD'] == 1) |
-   (visit_area_info['VISIT_AREA_TYPE_CD'] == 2) |(visit_area_info['VISIT_AREA_TYPE_CD'] == 3) | (visit_area_info['VISIT_AREA_TYPE_CD'] == 4) |
-    (visit_area_info['VISIT_AREA_TYPE_CD'] == 5) | (visit_area_info['VISIT_AREA_TYPE_CD'] == 6) |(visit_area_info['VISIT_AREA_TYPE_CD'] == 7) |
-     (visit_area_info['VISIT_AREA_TYPE_CD'] == 8)]
-  visit_info = visit_info.groupby('VISIT_AREA_NM').filter(lambda x: len(x) > 1)
-  visit_info=visit_info.reset_index(drop = True)
+# 그 뭘 했었는지 - 방문장소 , 여기서 방문한 장소의 타입을 찾을 수 있음
+visit_merged = pd.read_csv('./data/Train/tn_visit_area_info_방문지정보_merged.csv')
 
-visit_final_E=visit_info
+# 돈은 얼마나 쓰는지 - 지출내역
+adv_consume_his_act = pd.read_csv('./data/Train/tn_activity_consume_his_활동소비내역_t.csv')
+adv_consume_his_prev = pd.read_csv('./data/Train/tn_adv_consumehis사전소비내역_t.csv')
 
-visit_final_E['ratings'] = visit_final_E[['DGSTFN', 'REVISIT_INTENTION', 'RCMDTN_INTENTION']].mean(axis=1)
+# 누구랑 가는지 - 동행자 정보
+companion_info = pd.read_csv('./data/Train/tn_companioninfo동반자정보_t.csv')
 
-visit_final_E['TRAVELER_ID'] = visit_final_E['TRAVEL_ID'].str.split('_').str[1]
+# 뭘 타고는지 - 이동수단소비내역
+move_his = pd.read_csv('./data/Train/tn_mvmn_consume_his_이동수단소비내역_merged.csv')
+move_consume_his = pd.read_csv('./data/Train/tn_mvmn_consume_his_이동수단소비내역_merged.csv')
+
+# 여행 목적 - 여행 페르소나
+trip_persona = pd.read_csv('./data/Train/tn_travel_여행_merged.csv')
+
+# TODO: 감정 (무드)를 추출해보기 위한 데이터 추후 추가 필요요
+
+
+# ㅇㅇ
+id_list=['e']
+
+visit_data_list=[visit_merged]
+
+
+# 관광지 선택
+visit_info = visit_data_list[ (visit_data_list['VISIT_AREA_TYPE_CD'] == 1) |
+    (visit_data_list['VISIT_AREA_TYPE_CD'] == 2) |(visit_data_list['VISIT_AREA_TYPE_CD'] == 3) | (visit_data_list['VISIT_AREA_TYPE_CD'] == 4) |
+    (visit_data_list['VISIT_AREA_TYPE_CD'] == 5) | (visit_data_list['VISIT_AREA_TYPE_CD'] == 6) |(visit_data_list['VISIT_AREA_TYPE_CD'] == 7) |
+    (visit_data_list['VISIT_AREA_TYPE_CD'] == 8)]
+visit_info = visit_info.groupby('VISIT_AREA_NM').filter(lambda x: len(x) > 1)
+visit_info=visit_info.reset_index(drop = True)
+
+visit_final_Merge=visit_info
+
+visit_final_Merge['ratings'] = visit_final_Merge[['DGSTFN', 'REVISIT_INTENTION', 'RCMDTN_INTENTION']].mean(axis=1)
+
+visit_final_Merge['TRAVELER_ID'] = visit_final_Merge['TRAVEL_ID'].str.split('_').str[1]
 
 """###세부 전처리
 
 ####A권역
 """
 
-visit_final_E['SIDO'] = visit_final_E['LOTNO_ADDR'].str.split().str[0]
+visit_final_Merge['SIDO'] = visit_final_Merge['LOTNO_ADDR'].str.split().str[0]
 
-dfe=visit_final_E
+dfe=visit_final_Merge
 # Group by 'FIRST_WORD' and find the most frequent 'VISIT_AREA_NM' for each group
 most_frequent_visits = dfe.groupby('LOTNO_ADDR')['VISIT_AREA_NM'].agg(lambda x: x.mode().iloc[0]).reset_index()
 
@@ -85,7 +112,7 @@ df1 = dfe.rename(columns={'TRAVELER_ID': 'userID','VISIT_AREA_NM': 'itemID','rat
 
 df1=df1[['userID','itemID','rating','SIDO']]
 
-df1.to_csv("../2.preprocessed/dfE.csv")
+df1.to_csv("./2.preprocessed/dfE.csv")
 
 """#모델 수정"""
 
@@ -145,12 +172,12 @@ algo.fit(trainset)
 cross_validate(algo=algo, data=data, measures=['RMSE', 'MAE'], cv=10, verbose=True, n_jobs=-1)
 
 # Specify the file path including the directory where you want to save the model
-file_path = '../4.SaveModel/model/svd_model_E.pkl'
+file_path = './4.SaveModel/model/svd_model_E.pkl'
 # Save the model to the specified .pkl file
 with open(file_path, 'wb') as file:
     pickle.dump(algo, file)
 
-loaded_model1 = joblib.load('../4.SaveModel/model/svd_model_E.pkl')
+loaded_model1 = joblib.load('./4.SaveModel/model/svd_model_E.pkl')
 
 predictions=loaded_model1.test(testset)
 
@@ -271,7 +298,7 @@ recommendation_lists['recommendation'] = recommendation_lists['recommendation'].
 
 # Create the final DataFrame df_E_final
 df_E_final = recommendation_lists.copy()
-df_E_final.to_csv('../4.SaveModel/result/testset_output/E_test_ouput.csv')
+df_E_final.to_csv('./4.SaveModel/result/testset_output/E_test_ouput.csv')
 
 dataset = df1.drop('SIDO',axis=1).values.tolist()
 sido_df=df1[['itemID', 'SIDO']].drop_duplicates()
@@ -314,7 +341,7 @@ filtered_top_recommendations = top_recommendations_with_sido.groupby('userID').a
 # Reset index after applying the function
 filtered_top_recommendations.reset_index(drop=True, inplace=True)
 
-filtered_top_recommendations.to_csv('../4.SaveModel/result/final_output/E_top_recommendations.csv')
+filtered_top_recommendations.to_csv('./4.SaveModel/result/final_output/E_top_recommendations.csv')
 
 from datetime import datetime
 
