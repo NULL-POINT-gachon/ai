@@ -38,25 +38,27 @@ from sklearn.model_selection import cross_val_score
 
 # csv 내 코드 데이터
 
-codeA = pd.read_csv('./data/Train/tc_codea_코드A.csv')
-codeB = pd.read_csv('./data/Train/tc_codea_코드B.csv')
-code_area = pd.read_csv('./data/Train/tc_sgg_시군구코드.csv')
+codeA = pd.read_csv('data/Train/tc_codea_코드A.csv')
+codeB = pd.read_csv('data/Train/tc_codeb_코드B.csv')
+code_area = pd.read_csv('data/Train/tc_sgg_시군구코드.csv')
 
 # 라벨링 데이터
 
 # 그 뭘 했었는지 - 방문장소 , 여기서 방문한 장소의 타입을 찾을 수 있음
-visit_merged = pd.read_csv('./data/Train/tn_visit_area_info_방문지정보_merged.csv')
+visit_merged = pd.read_csv('data/Train/tn_visit_area_info_방문지정보_merged.csv')
 
 # 돈은 얼마나 쓰는지 - 지출내역
-adv_consume_his_act = pd.read_csv('./data/Train/tn_activity_consume_his_활동소비내역_t.csv')
-adv_consume_his_prev = pd.read_csv('./data/Train/tn_adv_consumehis사전소비내역_t.csv')
+adv_consume_his_act = pd.read_csv('data/Train/tn_activity_consume_his_활동소비내역_t.csv')
+adv_consume_his_prev = pd.read_csv('data/Train/tn_adv_consumehis사전소비내역_t.csv')
 
 # 누구랑 가는지 - 동행자 정보
-companion_info = pd.read_csv('./data/Train/tn_companioninfo동반자정보_t.csv')
+# The above code is reading a CSV file named 'tn_companion_info동반자정보_t.csv' located in the
+# 'data/Train' directory and storing its contents in a pandas DataFrame called `companion_info`.
+# companion_info = pd.read_csv('data/Train/tn_companion_info동반자정보_t.csv')
 
 # 뭘 타고는지 - 이동수단소비내역
-move_his = pd.read_csv('./data/Train/tn_mvmn_consume_his_이동수단소비내역_merged.csv')
-move_consume_his = pd.read_csv('./data/Train/tn_mvmn_consume_his_이동수단소비내역_merged.csv')
+move_his = pd.read_csv('data/Train/tn_move_his_이동내역_merged.csv')
+move_consume_his = pd.read_csv('data/Train/tn_mvmn_consume_his_이동수단소비내역_merged.csv')
 
 # 여행 목적 - 여행 페르소나
 trip_persona = pd.read_csv('./data/Train/tn_travel_여행_merged.csv')
@@ -65,16 +67,26 @@ trip_persona = pd.read_csv('./data/Train/tn_travel_여행_merged.csv')
 
 
 # ㅇㅇ
-id_list=['e']
+# id_list=['e']
 
 visit_data_list=[visit_merged]
 
+visit_area_info = visit_data_list[0]
 
 # 관광지 선택
-visit_info = visit_data_list[ (visit_data_list['VISIT_AREA_TYPE_CD'] == 1) |
-    (visit_data_list['VISIT_AREA_TYPE_CD'] == 2) |(visit_data_list['VISIT_AREA_TYPE_CD'] == 3) | (visit_data_list['VISIT_AREA_TYPE_CD'] == 4) |
-    (visit_data_list['VISIT_AREA_TYPE_CD'] == 5) | (visit_data_list['VISIT_AREA_TYPE_CD'] == 6) |(visit_data_list['VISIT_AREA_TYPE_CD'] == 7) |
-    (visit_data_list['VISIT_AREA_TYPE_CD'] == 8)]
+# 관광지 타입 중 아래 사용
+# 1002,VIS,"1",자연관광지,"","",N,10,"2022-07-05 10:48:17",
+# 1003,VIS,"2","역사/유적/종교 시설(문화재, 박물관, 촬영지, 절 등)","","",N,20,"2022-07-05 10:48:24",
+# 1005,VIS,"3","문화 시설(공연장, 영화관, 전시관 등)","","",N,30,"2022-07-05 11:23:34",
+# 1006,VIS,"4","상업지구(거리, 시장, 쇼핑시설)","","",N,40,"2022-07-05 11:23:39",
+# 1007,VIS,"5","레저/스포츠 관련 시설(스키, 카트, 수상레저)","","",N,50,"2022-07-05 11:23:47",
+# 1008,VIS,"6","테마시설(놀이공원, 워터파크)","","",N,60,"2022-07-05 11:23:56",
+# 1009,VIS,"7","산책로, 둘레길 등","","",N,70,"2022-07-05 11:24:06",
+# 1010,VIS,"8",지역 축제/행사,"","",N,80,"2022-07-05 11:24:15",
+visit_info = visit_area_info[ (visit_area_info['VISIT_AREA_TYPE_CD'] == 1) |
+    (visit_area_info['VISIT_AREA_TYPE_CD'] == 2) |(visit_area_info['VISIT_AREA_TYPE_CD'] == 3) | (visit_area_info['VISIT_AREA_TYPE_CD'] == 4) |
+    (visit_area_info['VISIT_AREA_TYPE_CD'] == 5) | (visit_area_info['VISIT_AREA_TYPE_CD'] == 6) |(visit_area_info['VISIT_AREA_TYPE_CD'] == 7) |
+    (visit_area_info['VISIT_AREA_TYPE_CD'] == 8)]
 visit_info = visit_info.groupby('VISIT_AREA_NM').filter(lambda x: len(x) > 1)
 visit_info=visit_info.reset_index(drop = True)
 
@@ -83,6 +95,7 @@ visit_final_Merge=visit_info
 visit_final_Merge['ratings'] = visit_final_Merge[['DGSTFN', 'REVISIT_INTENTION', 'RCMDTN_INTENTION']].mean(axis=1)
 
 visit_final_Merge['TRAVELER_ID'] = visit_final_Merge['TRAVEL_ID'].str.split('_').str[1]
+
 
 """###세부 전처리
 
@@ -145,7 +158,7 @@ reader = Reader(rating_scale=(1, 5))
 data = Dataset.load_from_df(df1[['userID', 'itemID', 'rating']], reader)
 
 algo = SVD()
-param_grid = {'n_factors':[50,100,200],'n_epochs': [10,50], 'lr_all': [0.01,0.1], 'reg_all':[0.01,0.1], 'reg_bu':[0.01,0.1],'reg_bi':[0.01,0.1]}
+param_grid = {'n_factors':[50,100,200],'n_epochs': [100,500], 'lr_all': [0.01,0.1], 'reg_all':[0.01,0.1], 'reg_bu':[0.01,0.1],'reg_bi':[0.01,0.1]}
 grid = GridSearchCV(SVD, param_grid, measures=['RMSE', 'MAE'], cv=5, n_jobs=-1, joblib_verbose= 10)
 grid.fit(data=data)
 
@@ -241,7 +254,6 @@ for (user_id, pred_rec), group in grouped:
 
         # Set 'true_rec' to 1 for the majority 'SIDO' and 0 for others
         predictions_df_E.loc[group.index, 'pred_rec'] = (group['SIDO'] == majority_sido).astype(int)
-
 
 # In[13]:
 
