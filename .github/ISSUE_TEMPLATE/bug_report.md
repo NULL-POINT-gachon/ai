@@ -1,0 +1,25 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
+
+---
+
+---
+name: 새로운 기능 추가
+about: 새로운 기능 구현을 위한 이슈 템플릿입니다.
+title: '[FEATURE]:'
+labels: feat
+assignees: ''
+---
+
+## 기능 설명
+<!-- 새로운 기능에 대한 설명을 작성해주세요 -->
+
+## 구현 방법 & 요구사항
+<!-- 기능을 구현하기 위한 방법과 요구사항을 작성해주세요 -->
+
+## 참고 자료
+<!-- 기능 구현에 도움이 될 수 있는 참고 자료가 있다면 링크를 첨부해주세요 -->
