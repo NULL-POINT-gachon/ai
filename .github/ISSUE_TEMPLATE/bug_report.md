@@ -1,18 +1,10 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: ''
+about: 버그 수정을 위한 이슈 템플릿입니다.
+title: "[BUG]:"
 labels: ''
 assignees: ''
 
----
-
----
-name: 새로운 기능 추가
-about: 새로운 기능 구현을 위한 이슈 템플릿입니다.
-title: '[FEATURE]:'
-labels: feat
-assignees: ''
 ---
 
 ## 기능 설명
