@@ -1,0 +1,14 @@
+2025-05-03 20:18:16,851 - __main__ - ERROR - 장소 데이터 로드 실패: [Errno 2] No such file or directory: '../../data/reommencder/place/place_data.csv'
+2025-05-03 20:18:16,852 - __main__ - WARNING - '경기도'에 해당하는 여행지가 없습니다.
+2025-05-03 20:21:35,099 - __main__ - ERROR - 도시 데이터 로드 실패: [Errno 2] No such file or directory: '../../data/reommencder/city/city_data_refined.csv'
+2025-05-03 20:22:12,579 - __main__ - ERROR - 도시 데이터 로드 실패: [Errno 2] No such file or directory: '../../data/reommencder/city/city_data_refined.csv'
+2025-05-03 20:22:24,456 - __main__ - ERROR - 도시 데이터 로드 실패: [Errno 2] No such file or directory: '/data/reommencder/city/city_data_refined.csv'
+2025-05-03 22:51:41,396 - __main__ - ERROR - 장소 데이터 로드 실패: [Errno 2] No such file or directory: '/home/hyeonwch/total/ai/data/recommender/city/places/place_data_clean.csv'
+2025-05-03 22:51:41,408 - __main__ - WARNING - '경기도'에 해당하는 여행지가 없습니다.
+2025-05-03 22:51:50,222 - __main__ - ERROR - 장소 데이터 로드 실패: [Errno 2] No such file or directory: '/home/hyeonwch/total/ai/data/recommender/city/places/place_data_clean.csv'
+2025-05-03 22:51:50,223 - __main__ - WARNING - '경기도'에 해당하는 여행지가 없습니다.
+2025-05-03 22:52:10,936 - __main__ - ERROR - 장소 데이터 로드 실패: [Errno 2] No such file or directory: '/home/hyeonwch/total/ai/data/recommender/city/places/place_data_clean.csv'
+2025-05-03 22:52:19,163 - __main__ - ERROR - 장소 데이터 로드 실패: [Errno 2] No such file or directory: '/home/hyeonwch/total/ai/data/recommender/city/places/place_data_clean.csv'
+2025-05-03 22:52:40,842 - __main__ - WARNING - '서울'에 해당하는 여행지가 없습니다.
+2025-05-04 03:38:04,009 - __main__ - ERROR - 도시 데이터가 비어 있습니다.
+2025-05-04 03:41:07,276 - __main__ - WARNING - 서울에 해당하는 여행지가 없습니다.
