@@ -79,6 +79,8 @@ def parse_args():
     p.add_argument("--activity_ids", type=str)
     p.add_argument("--preferred_transport", type=str)
     p.add_argument("--activity_level", type=int)
+    p.add_argument("--place_name", type=str,
+                   help="사용자가 반드시 포함하길 원하는 장소명")
     # 파일 경로
     p.add_argument("--models_dir", type=str,
                    default="/home/hyeonwch/total/ai/src/model/models")
@@ -222,7 +224,10 @@ def recommend_places(args, mapping_df, place_df):
     w_emotions = get_weighted_emotions(args)
     scores = []
 
-    activity_ids = [int(i) for i in args.activity_ids.split(",")] if args.activity_ids else []
+    activity_ids = (
+        [int(i) for i in args.activity_ids.split(",") if i.strip()]
+        if args.activity_ids else []
+    )
 
     for _, p in subset.iterrows():
         s = 0.0
@@ -256,6 +261,69 @@ def recommend_places(args, mapping_df, place_df):
         t.pop("score", None)
     return {"places": top}
 
+
+def recommend_final_places(args, mapping_df, place_df):
+    """
+    - recommend_places() 1차 결과 + place_name(필수 포함) 유지
+    - 목표 개수 = args.top_n  (프런트에서 2×activityLevel 로 계산해 보냄)
+    - 부족분은 동일 도시에서 스코어를 다시 계산해 채움
+    - 반환: {"places": [...]}
+    """
+    # 1차 추천
+    base = recommend_places(args, mapping_df, place_df)["places"]
+    final_places = base[:]                 # 깊은 복사
+    used = {p["여행지명"] for p in final_places}
+
+    # ── (1) place_name 강제 포함 ─────────────────────────────
+    if args.place_name and args.place_name not in used:
+        row = place_df[(place_df["city"] == args.city) &
+                       (place_df["여행지명"] == args.place_name)]
+        if not row.empty:
+            r = row.iloc[0]
+            final_places.insert(0, {"여행지명": r["여행지명"], "분류": r["분류"]})
+        else:
+            # 데이터에 없더라도 이름만 넣어 준다
+            final_places.insert(0, {"여행지명": args.place_name, "분류": "Unknown"})
+        used.add(args.place_name)
+
+    # ── (2) 목표 개수 맞추기 ────────────────────────────────
+    target = args.top_n                  # 이미 2×activityLevel 로 넘어옴
+    if len(final_places) < target:
+        # 가중치 계산을 위해 공통 도구 재사용
+        w_emotions  = get_weighted_emotions(args)
+        req_act_ids = [int(i) for i in args.activity_ids.split(",")] if args.activity_ids else []
+
+        extras = []
+        for _, row in place_df[place_df["city"] == args.city].iterrows():
+            if row["여행지명"] in used:
+                continue
+
+            score = 0.0
+            if args.activity_type and row["activity_type"] == args.activity_type:
+                score += 1.0
+
+            row_acts = [int(a) for a in str(row["activity_ids"]).split(";") if a.isdigit()]
+            if req_act_ids:
+                match = sum(1 for a in req_act_ids if a in row_acts) / len(req_act_ids)
+                score += match * 2.0
+
+            row_emotions = [int(e) for e in str(row["emotion_match"]).split(";") if e.isdigit()]
+            score += sum(w_emotions.get(e, 0) for e in row_emotions) * 1.5
+
+            if args.activity_level is not None:
+                diff = abs(row["activity_level"] - args.activity_level)
+                score += max(0, 10 - diff) / 10
+
+            extras.append({"여행지명": row["여행지명"], "분류": row["분류"], "score": score})
+
+        extras.sort(key=lambda x: x["score"], reverse=True)
+        need = target - len(final_places)
+        final_places.extend({k: v for k, v in d.items() if k != "score"} for d in extras[:need])
+
+    # ── (3) 초과 시 자르기 ──────────────────────────────────
+    final_places = final_places[:target]
+    return {"places": final_places}
+
 # ────────────────────── 메인 ──────────────────────
 def main():
     args = parse_args()
@@ -267,16 +335,16 @@ def main():
             sys.exit(1)
         city_df = load_city_data(args.city_data)
         result = recommend_cities(args, mapping_df, city_df)
-
+        
     elif args.mode == "detail":
-        for req, flag in [("city", args.city), ("activity_type", args.activity_type),
-                          ("activity_ids", args.activity_ids)]:
+        for req, flag in [("city", args.city),
+                      ("activity_type", args.activity_type),
+                      ("activity_ids", args.activity_ids)]:
             if not flag:
                 logger.error(f"--{req} 인자가 필요합니다.")
                 sys.exit(1)
         place_df = load_place_data(args.place_data)
-        result = recommend_places(args, mapping_df, place_df)
-
+        result = recommend_final_places(args, mapping_df, place_df)
     else:
         logger.error("알 수 없는 모드")
         sys.exit(1)
