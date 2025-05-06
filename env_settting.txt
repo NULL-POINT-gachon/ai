@@ -1,3 +1,13 @@
+# 파이썬 설치
+-- Windows
+1. PowerShell / CMD에서: python --version 이 명령어로 파이썬 버전 확인 후 미설치 혹은 버전이 3.10이 아니면,
+2. https://www.python.org/downloads/windows/ → Latest Python 3 Release 다운로드 (3.10이 좋습니다)
+3. 설치 마법사에서 “Add Python to PATH” 체크 후 Install
+
+-- macOS
+1. 터미널에서 python3 --version 으로 파이썬 설치 여부 체크해주시고, 안깔려있다면
+2. brew install python@3.10	으로 설치해주시면 됩니다.
+
 # 가상환경 설정
 -- Windows
 python -m venv venv
