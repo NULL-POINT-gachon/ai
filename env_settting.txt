@@ -1,0 +1,11 @@
+# 가상환경 설정
+-- Windows
+python -m venv venv
+.\venv\Scripts\activate
+
+-- macOS / Linux / WSL
+python3 -m venv venv
+source venv/bin/activate
+
+# 패키지 설치
+pip install -r ai/requirements.txt
