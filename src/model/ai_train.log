@@ -35,3 +35,73 @@
 2025-05-03 20:10:23,210 - __main__ - INFO - ìµœì‹  ëª¨ë¸ ì •ë³´ ê°±ì‹  ì™„ë£Œ: models/latest.json
 2025-05-03 20:10:23,210 - __main__ - INFO - ëª¨ë¸ ì €ì¥ ì™„ë£Œ (ë²„ì „: model_v20250503_201023)
 2025-05-03 20:10:23,210 - __main__ - INFO - ê°ì • ê¸°ë°˜ ì—¬í–‰ ì¶”ì²œ ì‹œìŠ¤í…œ ëª¨ë¸ í•™ìŠµ ì™„ë£Œ
+2025-05-13 15:46:45,227 - __main__ - INFO - °¨Á¤ ±â¹İ ¿©Çà ÃßÃµ ½Ã½ºÅÛ ¸ğµ¨ ÇĞ½À ½ÃÀÛ
+2025-05-13 15:46:45,234 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí »ı¼º ¿Ï·á (Å©±â: 18)
+2025-05-13 15:46:45,241 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí ÀúÀå ¿Ï·á: models\emotion_mapping.csv
+2025-05-13 15:46:45,535 - __main__ - INFO - µ¥ÀÌÅÍ ·Îµå ¿Ï·á (Å©±â: (102957, 12))
+2025-05-13 15:46:51,757 - __main__ - INFO - µ¥ÀÌÅÍ ÀüÃ³¸® ¿Ï·á (ÇĞ½À µ¥ÀÌÅÍ Å©±â: (82287, 44), Å×½ºÆ® µ¥ÀÌÅÍ Å©±â: (20572, 44))
+2025-05-13 15:47:15,619 - __main__ - INFO - MSE: 0.6013
+2025-05-13 15:47:15,619 - __main__ - INFO - RMSE: 0.7754
+2025-05-13 15:47:15,619 - __main__ - INFO - MAE: 0.5640
+2025-05-13 15:47:15,619 - __main__ - INFO - R©÷: 0.1231
+2025-05-13 15:47:15,620 - __main__ - INFO - Çã¿ë ¿ÀÂ÷(0.5) ³» Á¤È®µµ: 0.5566
+2025-05-13 15:47:15,622 - __main__ - INFO - ¸ğµ¨ ÇĞ½À ¿Ï·á
+2025-05-13 15:47:15,623 - __main__ - ERROR - ¸ğµ¨ ÀúÀå ½ÇÆĞ: Saving the model to HDF5 format requires the model to be a Functional model or a Sequential model. It does not work for subclassed models, because such models are defined via the body of a Python method, which isn't safely serializable. Consider saving to the Tensorflow SavedModel format (by setting save_format="tf") or using `save_weights`.
+2025-05-15 12:55:15,778 - __main__ - INFO - °¨Á¤ ±â¹İ ¿©Çà ÃßÃµ ½Ã½ºÅÛ ¸ğµ¨ ÇĞ½À ½ÃÀÛ
+2025-05-15 12:55:15,785 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí »ı¼º ¿Ï·á (Å©±â: 18)
+2025-05-15 12:55:15,793 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí ÀúÀå ¿Ï·á: models\emotion_mapping.csv
+2025-05-15 12:55:15,793 - __main__ - ERROR - µ¥ÀÌÅÍ ·Îµå ½ÇÆĞ: [Errno 2] No such file or directory: '../../data/train/final_df.csv'
+2025-05-15 12:56:45,857 - __main__ - INFO - °¨Á¤ ±â¹İ ¿©Çà ÃßÃµ ½Ã½ºÅÛ ¸ğµ¨ ÇĞ½À ½ÃÀÛ
+2025-05-15 12:56:45,859 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí »ı¼º ¿Ï·á (Å©±â: 18)
+2025-05-15 12:56:45,863 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí ÀúÀå ¿Ï·á: models\emotion_mapping.csv
+2025-05-15 12:56:46,290 - __main__ - INFO - µ¥ÀÌÅÍ ·Îµå ¿Ï·á (Å©±â: (217966, 13))
+2025-05-15 12:56:56,213 - __main__ - INFO - µ¥ÀÌÅÍ ÀüÃ³¸® ¿Ï·á (ÇĞ½À µ¥ÀÌÅÍ Å©±â: (174372, 45), Å×½ºÆ® µ¥ÀÌÅÍ Å©±â: (43594, 45))
+2025-05-15 12:57:17,911 - __main__ - INFO - MSE: 0.5947
+2025-05-15 12:57:17,912 - __main__ - INFO - RMSE: 0.7712
+2025-05-15 12:57:17,912 - __main__ - INFO - MAE: 0.5752
+2025-05-15 12:57:17,912 - __main__ - INFO - R©÷: 0.1441
+2025-05-15 12:57:17,913 - __main__ - INFO - Çã¿ë ¿ÀÂ÷(0.5) ³» Á¤È®µµ: 0.5383
+2025-05-15 12:57:17,918 - __main__ - INFO - ¸ğµ¨ ÇĞ½À ¿Ï·á
+2025-05-15 12:57:17,919 - __main__ - ERROR - ¸ğµ¨ ÀúÀå ½ÇÆĞ: Saving the model to HDF5 format requires the model to be a Functional model or a Sequential model. It does not work for subclassed models, because such models are defined via the body of a Python method, which isn't safely serializable. Consider saving to the Tensorflow SavedModel format (by setting save_format="tf") or using `save_weights`.
+2025-05-15 12:59:10,107 - __main__ - INFO - °¨Á¤ ±â¹İ ¿©Çà ÃßÃµ ½Ã½ºÅÛ ¸ğµ¨ ÇĞ½À ½ÃÀÛ
+2025-05-15 12:59:10,110 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí »ı¼º ¿Ï·á (Å©±â: 18)
+2025-05-15 12:59:10,113 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí ÀúÀå ¿Ï·á: ./models\emotion_mapping.csv
+2025-05-15 12:59:10,553 - __main__ - INFO - µ¥ÀÌÅÍ ·Îµå ¿Ï·á (Å©±â: (217966, 13))
+2025-05-15 12:59:20,396 - __main__ - INFO - µ¥ÀÌÅÍ ÀüÃ³¸® ¿Ï·á (ÇĞ½À µ¥ÀÌÅÍ Å©±â: (174372, 45), Å×½ºÆ® µ¥ÀÌÅÍ Å©±â: (43594, 45))
+2025-05-15 12:59:38,894 - __main__ - INFO - MSE: 0.5942
+2025-05-15 12:59:38,894 - __main__ - INFO - RMSE: 0.7708
+2025-05-15 12:59:38,894 - __main__ - INFO - MAE: 0.5578
+2025-05-15 12:59:38,895 - __main__ - INFO - R©÷: 0.1449
+2025-05-15 12:59:38,896 - __main__ - INFO - Çã¿ë ¿ÀÂ÷(0.5) ³» Á¤È®µµ: 0.5656
+2025-05-15 12:59:38,900 - __main__ - INFO - ¸ğµ¨ ÇĞ½À ¿Ï·á
+2025-05-15 12:59:38,901 - __main__ - ERROR - ¸ğµ¨ ÀúÀå ½ÇÆĞ: Saving the model to HDF5 format requires the model to be a Functional model or a Sequential model. It does not work for subclassed models, because such models are defined via the body of a Python method, which isn't safely serializable. Consider saving to the Tensorflow SavedModel format (by setting save_format="tf") or using `save_weights`.
+2025-05-15 13:03:38,695 - __main__ - INFO - °¨Á¤ ±â¹İ ¿©Çà ÃßÃµ ½Ã½ºÅÛ ¸ğµ¨ ÇĞ½À ½ÃÀÛ
+2025-05-15 13:03:38,697 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí »ı¼º ¿Ï·á (Å©±â: 18)
+2025-05-15 13:03:38,702 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí ÀúÀå ¿Ï·á: ./models\emotion_mapping.csv
+2025-05-15 13:03:39,198 - __main__ - INFO - µ¥ÀÌÅÍ ·Îµå ¿Ï·á (Å©±â: (217966, 13))
+2025-05-15 13:03:50,849 - __main__ - INFO - µ¥ÀÌÅÍ ÀüÃ³¸® ¿Ï·á (ÇĞ½À µ¥ÀÌÅÍ Å©±â: (174372, 45), Å×½ºÆ® µ¥ÀÌÅÍ Å©±â: (43594, 45))
+2025-05-15 13:04:12,837 - __main__ - INFO - MSE: 0.5941
+2025-05-15 13:04:12,838 - __main__ - INFO - RMSE: 0.7708
+2025-05-15 13:04:12,838 - __main__ - INFO - MAE: 0.5711
+2025-05-15 13:04:12,838 - __main__ - INFO - R©÷: 0.1450
+2025-05-15 13:04:12,838 - __main__ - INFO - Çã¿ë ¿ÀÂ÷(0.5) ³» Á¤È®µµ: 0.5428
+2025-05-15 13:04:12,845 - __main__ - INFO - ¸ğµ¨ ÇĞ½À ¿Ï·á
+2025-05-15 13:04:12,846 - __main__ - ERROR - ¸ğµ¨ ÀúÀå ½ÇÆĞ: Saving the model to HDF5 format requires the model to be a Functional model or a Sequential model. It does not work for subclassed models, because such models are defined via the body of a Python method, which isn't safely serializable. Consider saving to the Tensorflow SavedModel format (by setting save_format="tf") or using `save_weights`.
+2025-05-15 13:04:44,323 - __main__ - INFO - °¨Á¤ ±â¹İ ¿©Çà ÃßÃµ ½Ã½ºÅÛ ¸ğµ¨ ÇĞ½À ½ÃÀÛ
+2025-05-15 13:04:44,326 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí »ı¼º ¿Ï·á (Å©±â: 18)
+2025-05-15 13:04:44,329 - __main__ - INFO - °¨Á¤-¿©Çàµ¿±â ¸ÅÇÎ Å×ÀÌºí ÀúÀå ¿Ï·á: ./models\emotion_mapping.csv
+2025-05-15 13:04:44,757 - __main__ - INFO - µ¥ÀÌÅÍ ·Îµå ¿Ï·á (Å©±â: (217966, 13))
+2025-05-15 13:04:54,972 - __main__ - INFO - µ¥ÀÌÅÍ ÀüÃ³¸® ¿Ï·á (ÇĞ½À µ¥ÀÌÅÍ Å©±â: (174372, 45), Å×½ºÆ® µ¥ÀÌÅÍ Å©±â: (43594, 45))
+2025-05-15 13:05:14,262 - __main__ - INFO - MSE: 0.5925
+2025-05-15 13:05:14,263 - __main__ - INFO - RMSE: 0.7697
+2025-05-15 13:05:14,263 - __main__ - INFO - MAE: 0.5711
+2025-05-15 13:05:14,264 - __main__ - INFO - R©÷: 0.1474
+2025-05-15 13:05:14,264 - __main__ - INFO - Çã¿ë ¿ÀÂ÷(0.5) ³» Á¤È®µµ: 0.5451
+2025-05-15 13:05:14,270 - __main__ - INFO - ¸ğµ¨ ÇĞ½À ¿Ï·á
+2025-05-15 13:05:15,890 - tensorflow - INFO - Assets written to: ./models\model_v20250515_130514\emotion_recommender\assets
+2025-05-15 13:05:15,970 - __main__ - INFO - ¸ğµ¨ ÀúÀå ¿Ï·á: ./models\model_v20250515_130514\emotion_recommender
+2025-05-15 13:05:15,975 - __main__ - INFO - ÀÎÄÚ´õ ÀúÀå ¿Ï·á: ./models\model_v20250515_130514\encoders.pkl
+2025-05-15 13:05:15,977 - __main__ - INFO - Æò°¡ °á°ú ÀúÀå ¿Ï·á: ./models\model_v20250515_130514\results.json
+2025-05-15 13:05:15,978 - __main__ - INFO - ÃÖ½Å ¸ğµ¨ Á¤º¸ °»½Å ¿Ï·á: ./models\latest.json
+2025-05-15 13:05:15,978 - __main__ - INFO - ¸ğµ¨ ÀúÀå ¿Ï·á (¹öÀü: model_v20250515_130514)
+2025-05-15 13:05:15,978 - __main__ - INFO - °¨Á¤ ±â¹İ ¿©Çà ÃßÃµ ½Ã½ºÅÛ ¸ğµ¨ ÇĞ½À ¿Ï·á

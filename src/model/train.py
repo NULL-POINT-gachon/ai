@@ -26,7 +26,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("ai_train.log"),
+        logging.FileHandler("ai_train.log", encoding="utf-8"),
         logging.StreamHandler()
     ]
 )
@@ -476,8 +476,8 @@ def save_model(model, user_encoder, item_encoder, results, args):
     os.makedirs(model_dir, exist_ok=True)
     
     # TensorFlow 모델 저장
-    model_path = os.path.join(model_dir, "emotion_recommender.keras")
-    model.save(model_path)
+    model_path = os.path.join(model_dir, "emotion_recommender")
+    model.save(model_path, save_format='tf')
     logger.info(f"모델 저장 완료: {model_path}")
     
     # 인코더 저장
